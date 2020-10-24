@@ -22,12 +22,22 @@ class NowPlayingViewModel @androidx.hilt.lifecycle.ViewModelInject constructor(
     val nowPlayingLiveData: LiveData<State<List<Movie>>>
         get() = _nowPlayingLiveData
 
+    private val _favouriteLiveData = MutableLiveData<Movie>()
+
+    val favouriteLiveData: LiveData<Movie>
+        get() = _favouriteLiveData
 
     fun getNowPlaying(){
         viewModelScope.launch {
             repository.getNowPlaying().collect {
                _nowPlayingLiveData.value = it
             }
+        }
+    }
+
+    fun updateMovie(movie: Movie){
+        viewModelScope.launch {
+            repository.updateMovie(movie)
         }
     }
 }

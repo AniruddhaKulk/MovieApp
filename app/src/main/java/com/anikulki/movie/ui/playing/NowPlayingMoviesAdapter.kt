@@ -1,17 +1,19 @@
 package com.anikulki.movie.ui.playing
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anikulki.movie.R
 import com.anikulki.movie.data.local.db.entity.Movie
 import com.anikulki.movie.databinding.ItemMoviesBinding
 import com.anikulki.movie.utils.common.Constants
 import com.bumptech.glide.Glide
 
-class NowPlayingMoviesAdapter: ListAdapter<Movie, NowPlayingMoviesAdapter.MoviesHolder>(DIFF_UTIL) {
+class NowPlayingMoviesAdapter(
+    private val listener: OnItemClickListener
+): ListAdapter<Movie, NowPlayingMoviesAdapter.MoviesHolder>(DIFF_UTIL) {
 
     companion object{
         private val DIFF_UTIL =
@@ -42,10 +44,26 @@ class NowPlayingMoviesAdapter: ListAdapter<Movie, NowPlayingMoviesAdapter.Movies
         fun bind(movie: Movie){
             binding.apply {
                 tvTitle.text = movie.title
+
                 Glide.with(itemView.context)
                     .load(Constants.IMAGE_URL + movie.imageUrl)
                     .into(ivMoviePoster)
+
+                ivFav.setOnClickListener {
+                    listener.onMovieClick(movie)
+                }
+
+                var img = R.drawable.ic_outline_star_border_24
+                if(movie.isFavourite){
+                    img = R.drawable.ic_baseline_star_24
+                }
+
+                ivFav.setImageResource(img)
             }
         }
+    }
+
+    interface OnItemClickListener{
+        fun onMovieClick(movie: Movie)
     }
 }

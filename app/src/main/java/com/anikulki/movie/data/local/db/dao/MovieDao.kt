@@ -1,20 +1,27 @@
 package com.anikulki.movie.data.local.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.anikulki.movie.data.local.db.entity.Movie
+import com.anikulki.movie.utils.common.State
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 
 @Dao
 interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNowPlayingMovies(articles: List<Movie>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertNowPlayingMovies(movies: List<Movie>)
 
     @Query("SELECT * FROM now_playing")
     fun getNowPlayingMovies(): Flow<List<Movie>>
+
+    @Query("Update now_playing SET is_favourite = :isFav where id = :id")
+    suspend fun updateMovie(isFav: Boolean, id: Long)
+
+    @Query("SELECT * from now_playing where id = :id")
+    fun getMovieData(id: Long): Flow<Movie>
+
+    fun getMovieDataDistinctUntilChanged(id: Long) = getMovieData(id).distinctUntilChanged()
 
 }

@@ -1,5 +1,6 @@
 package com.anikulki.movie.repository
 
+import android.util.Log
 import com.anikulki.movie.data.local.db.DatabaseService
 import com.anikulki.movie.data.local.db.entity.Movie
 import com.anikulki.movie.data.remote.NetworkService
@@ -39,6 +40,18 @@ class MovieRepository @Inject constructor(
         }.asFlow()
     }
 
+    suspend fun getMovieDetail(id: Long): String{
+        return networkService.get().callMovieDetailAPI(id)
+    }
+
+    suspend fun updateMovie(movie: Movie){
+        databaseService.movieDao().updateMovie(movie.isFavourite, movie.id)
+    }
+
+    fun getMovieData(id: Long): Flow<Movie>{
+        return databaseService.movieDao().getMovieDataDistinctUntilChanged(id)
+    }
+
     private fun movieMapper(moviesResponse: MoviesResponse): List<Movie>{
         val list = mutableListOf<Movie>()
 
@@ -49,6 +62,7 @@ class MovieRepository @Inject constructor(
                 it.release_date,
                 it.poster_path,
                 it.overview,
+                false
             )
 
             list.add(movie)

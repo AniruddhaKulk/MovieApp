@@ -10,5 +10,18 @@
         android:id="@+id/nowPlayingFragment"
         android:name="com.anikulki.movie.ui.playing.NowPlayingFragment"
         android:label="fragment_now_playing"
-        tools:layout="@layout/fragment_now_playing" />
+        tools:layout="@layout/fragment_now_playing" >
+        <action
+            android:id="@+id/action_nowPlayingFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.anikulki.movie.ui.detail.MovieDetailFragment"
+        android:label="fragment_detail_movie"
+        tools:layout="@layout/fragment_detail_movie" >
+        <argument
+            android:name="movie"
+            app:argType="com.anikulki.movie.data.local.db.entity.Movie" />
+    </fragment>
 </navigation>

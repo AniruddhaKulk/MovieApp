@@ -1,6 +1,7 @@
 package com.anikulki.movie.ui.playing
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anikulki.movie.R
+import com.anikulki.movie.data.local.db.entity.Movie
 import com.anikulki.movie.databinding.FragmentNowPlayingBinding
 import com.anikulki.movie.utils.common.State
 import com.anikulki.movie.utils.network.NetworkHelper
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class NowPlayingFragment: Fragment(R.layout.fragment_now_playing){
+class NowPlayingFragment: Fragment(R.layout.fragment_now_playing),
+    NowPlayingMoviesAdapter.OnItemClickListener{
 
     private var _binding: FragmentNowPlayingBinding? = null
     private val binding
@@ -34,8 +37,7 @@ class NowPlayingFragment: Fragment(R.layout.fragment_now_playing){
 
         _binding = FragmentNowPlayingBinding.bind(view)
 
-
-        val adapter = NowPlayingMoviesAdapter()
+        val adapter = NowPlayingMoviesAdapter(this)
 
         val dividerItemDecoration = DividerItemDecoration(requireContext(),
             DividerItemDecoration.VERTICAL)
@@ -69,6 +71,14 @@ class NowPlayingFragment: Fragment(R.layout.fragment_now_playing){
         }
 
         checkNetworkConnection(adapter)
+    }
+
+    override fun onMovieClick(movie: Movie) {
+
+        val updatedMovie = movie.copy(
+            isFavourite = !movie.isFavourite
+        )
+        viewModel.updateMovie(updatedMovie)
     }
 
 
