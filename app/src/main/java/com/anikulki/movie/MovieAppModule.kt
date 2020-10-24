@@ -6,6 +6,7 @@ import com.anikulki.movie.data.local.db.DatabaseService
 import com.anikulki.movie.data.remote.NetworkService
 import com.anikulki.movie.data.remote.Networking
 import com.anikulki.movie.utils.common.Constants
+import com.anikulki.movie.utils.network.NetworkHelper
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -53,4 +54,9 @@ object MovieAppModule {
             "movies-app-db"
         ).fallbackToDestructiveMigration()
             .build()
+
+    @Provides
+    @Singleton
+    fun provideNetworkHelper(application: Application): NetworkHelper =
+        NetworkHelper(application)
 }

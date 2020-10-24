@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="color_primary">@color/colorPrimary</color>
+    <color name="color_primary_variant">@color/colorPrimaryDark</color>
+    <color name="color_on_primary">@color/black</color>
+    <color name="color_secondary">@color/secondaryLightColor</color>
+    <color name="color_secondary_variant">@color/secondaryDarkColor</color>
+    <color name="color_on_secondary">@color/black</color>
+    <color name="color_on_error">@color/black</color>
+    <color name="color_surface">@color/dark_grey</color>
+    <color name="color_on_surface">@color/white</color>
+    <color name="color_status_bar">@color/color_background</color>
+    <color name="color_status_bar_main">@color/color_background</color>
+    <color name="color_navigation_bar_main">@color/color_primary_variant</color>
+    <color name="color_navigation_bar_launcher">@color/color_background</color>
+
+    <color name="colorPrimary">#303133</color>
+    <color name="colorPrimaryDark">#07080c</color>
+    <color name="colorAccent">#ffbc03</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">@color/gray_200</color>
+
+    <color name="primaryLightColor">#595a5c</color>
+    <color name="secondaryLightColor">#ffee4e</color>
+    <color name="secondaryDarkColor">#c78c00</color>
+    <color name="headerColor">@color/secondaryDarkColor</color>
+
+    <color name="gray_200">#EEEEEE</color> <!--Color primary (dark)-->
+    <color name="gray_500">#9E9E9E</color> <!--Color primary (light)-->
+    <color name="gray_600">#757575</color> <!--Color primary variant (dark)-->
+    <color name="gray_700">#616161</color> <!--Color primary variant (light)-->
+
+    <color name="yellow_200">#FFF59D</color> <!--Color secondary-->
+    <color name="yellow_500">#FFEB3B</color> <!--Color secondary variant-->
+
+    <!--Color surface (light), color on error (light), -->
+    <!--color on surface (dark), color on surface (dark)-->
+    <color name="white_50">#ffffff</color>
+
+    <color name="black_800">#121212</color> <!--Color surface (dark)-->
+    <!--Color on secondary (light), color on background (light),-->
+    <!--color on surface (light)-->
+    <color name="black_900">#000000</color>
+
+    <color name="red_200">#cf6679</color> <!--Color error (dark)-->
+    <color name="red_600">#b00020</color> <!--Color error (light)-->
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_light">#d3d3d3</color>
+
+    <color name="color_background">@color/colorPrimary</color>
+    <color name="color_on_background">@color/white</color>
+    <color name="dark_grey">#121212</color>
 </resources>

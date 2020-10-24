@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Movie</string>
+    <string name="back_online">Network connection available</string>
+    <string name="no_connection">No Internet Connection</string>
 </resources>
