@@ -7,6 +7,7 @@ import com.anikulki.movie.data.remote.NetworkService
 import com.anikulki.movie.data.remote.Networking
 import com.anikulki.movie.utils.common.Constants
 import dagger.Lazy
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
@@ -15,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@Module
 @InstallIn(ApplicationComponent::class)
 object MovieAppModule {
 
