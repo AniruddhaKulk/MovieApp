@@ -1,4 +1,4 @@
-package com.anikulki.newsapp.utils.common
+package com.anikulki.movie.utils.common
 
 sealed class State <T> {
 

@@ -1,4 +1,4 @@
-package com.anikulki.newsapp.utils.common
+package com.anikulki.movie.utils.common
 
 import java.util.concurrent.atomic.AtomicBoolean
 
