@@ -2,10 +2,14 @@ package com.anikulki.movie.ui.playing
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anikulki.movie.R
@@ -36,6 +40,8 @@ class NowPlayingFragment: Fragment(R.layout.fragment_now_playing),
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentNowPlayingBinding.bind(view)
+
+        setHasOptionsMenu(true)
 
         val adapter = NowPlayingMoviesAdapter(this)
 
@@ -81,6 +87,27 @@ class NowPlayingFragment: Fragment(R.layout.fragment_now_playing),
         viewModel.updateMovie(updatedMovie)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if(item.itemId == R.id.actionFav){
+            gotoFavMoviesList()
+        }
+
+        return true
+    }
+
+    private fun gotoFavMoviesList(){
+        val action = NowPlayingFragmentDirections
+            .actionNowPlayingFragmentToFavouriteMoviesFragment()
+
+        findNavController().navigate(action)
+    }
 
     private fun checkNetworkConnection(adapter: NowPlayingMoviesAdapter){
         networkHelper.isNetworkConnected().observe(viewLifecycleOwner){isConnected ->

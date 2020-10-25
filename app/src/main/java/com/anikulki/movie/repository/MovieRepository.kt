@@ -1,6 +1,5 @@
 package com.anikulki.movie.repository
 
-import android.util.Log
 import com.anikulki.movie.data.local.db.DatabaseService
 import com.anikulki.movie.data.local.db.entity.Movie
 import com.anikulki.movie.data.remote.NetworkService
@@ -48,8 +47,8 @@ class MovieRepository @Inject constructor(
         databaseService.movieDao().updateMovie(movie.isFavourite, movie.id)
     }
 
-    fun getMovieData(id: Long): Flow<Movie>{
-        return databaseService.movieDao().getMovieDataDistinctUntilChanged(id)
+    fun getFavMoviesList(): Flow<List<Movie>>{
+       return databaseService.movieDao().getFavMoviesList()
     }
 
     private fun movieMapper(moviesResponse: MoviesResponse): List<Movie>{
